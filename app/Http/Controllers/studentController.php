@@ -88,6 +88,8 @@ class studentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = student::find($id);
+        $student->delete();
+        return json_encode(["id"=>$id,"student"=>$student]);
     }
 }
