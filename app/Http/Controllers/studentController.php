@@ -65,7 +65,8 @@ class studentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = student::find($id);
+        return json_encode(["student" => $student]);
     }
 
     /**
@@ -75,9 +76,19 @@ class studentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+       $student = new student;
+       $id = $request->input('id');
+       $nombre = $request->input('nombre');
+       $apellido = $request->input('apellido');
+       $url = $request->input('url');
+       $student = student::find($id);
+       $student->nombre = $nombre;
+       $student->apellido = $apellido;
+       $student->url = $url;
+       $student->save();
+       return json_encode(["student" => $student]);   
     }
 
     /**
